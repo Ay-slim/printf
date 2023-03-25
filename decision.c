@@ -5,6 +5,7 @@
 /**
  * flg_handler - Decide which handler to use
  * @flag: Format flag
+ * @ap: Variadic function list variable
  * Return: Nothing
  */
 int flg_handler(const char flag, va_list ap)
@@ -20,3 +21,4 @@ int flg_handler(const char flag, va_list ap)
 	va_end(ap);
 	return (0);
 }
+

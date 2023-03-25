@@ -41,3 +41,4 @@ int unknown_char_hndl(char chr)
 	_putchar(chr);
 	return (2);
 }
+
