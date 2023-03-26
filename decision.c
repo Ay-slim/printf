@@ -10,9 +10,9 @@
  */
 int flg_handler(const char flag, va_list ap)
 {
-	char *flags = "cdsipuoxX";
+	char *valid_flags = "cdsipuoxX";
 
-	if (!strchr(flags, va_arg(ap, int)))
+	if (!strchr(valid_flags, flag))
 		return (unknown_char_hndl(flag));
 	if (flag == 'c')
 		return (char_hndl(va_arg(ap, int)));

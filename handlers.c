@@ -38,7 +38,14 @@ int char_hndl(char chr)
 int unknown_char_hndl(char chr)
 {
 	_putchar('%');
-	_putchar(chr);
-	return (2);
+	if (chr != '%')
+	{
+		_putchar(chr);
+		return (2);
+	}
+	else
+	{
+		return (1);
+	}
 }
 
