@@ -5,16 +5,18 @@
 /**
  * string_hndl - Handle strings
  * @str: String to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: Number of characters
  */
-int string_hndl(char *str)
+int string_hndl(char *str, char *bfr, int idx)
 {
 	unsigned int i = 0;
 	unsigned int len = strlen(str);
 
 	while (i < len)
 	{
-		_putchar(str[i]);
+		bfr[idx + i] = str[i];
 		i++;
 	}
 	return (len);
@@ -22,26 +24,30 @@ int string_hndl(char *str)
 
 /**
  * char_hndl - Handle chars
- * @chr: Character to handle
+ * @chr: Char to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: 1
  */
-int char_hndl(char chr)
+int char_hndl(char chr, char *bfr, int idx)
 {
-	_putchar(chr);
+	bfr[idx] = chr;
 	return (1);
 }
 
 /**
  * unknown_char_hndl - Handle unknown chars
  * @chr: Character to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: 2
  */
-int unknown_char_hndl(char chr)
+int unknown_char_hndl(char chr, char *bfr, int idx)
 {
-	_putchar('%');
+	bfr[idx] = '%';
 	if (chr != '%')
 	{
-		_putchar(chr);
+		bfr[idx + 1] = chr;
 		return (2);
 	}
 	return (1);
@@ -50,13 +56,16 @@ int unknown_char_hndl(char chr)
 /**
  * binary_hndl - Handle b flag
  * @b: Unsigned int
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: Length of binary output
  */
-int binary_hndl(unsigned int b)
+int binary_hndl(unsigned int b, char *bfr, int idx)
 {
 	int k;
 	int i = 0;
 	int j = 0;
+	int l = 0;
 	unsigned int b_clone = b;
 	char *holder;
 
@@ -74,7 +83,8 @@ int binary_hndl(unsigned int b)
 	}
 	for (k = i - 1; k >= 0; k--)
 	{
-		_putchar(holder[k]);
+		bfr[idx + l] = holder[k];
+		l++;
 	}
 	free(holder);
 	return (i);

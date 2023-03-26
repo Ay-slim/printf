@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdarg.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -15,21 +15,24 @@ int _printf(const char *format, ...)
 	unsigned int ret_len = 0;
 	unsigned int f_len = strlen(format);
 	va_list ap;
+	char *buffer = malloc(1024 * sizeof(char));
 
 	va_start(ap, format);
 	while (i < f_len)
 	{
 		if (format[i] == '%' && i < f_len - 1)
 		{
-			ret_len += flg_handler(format[i + 1], ap);
+			ret_len += flg_handler(format[i + 1], ap, buffer, ret_len);
 			i += 2;
 			continue;
 		}
-		_putchar(format[i]);
+		buffer[ret_len] = format[i];
 		ret_len++;
 		i++;
 	}
 	va_end(ap);
+	write(1, buffer, ret_len);
+	free(buffer);
 	return (ret_len);
 }
 
