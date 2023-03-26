@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -41,11 +42,41 @@ int unknown_char_hndl(char chr)
 	if (chr != '%')
 	{
 		_putchar(chr);
-		return (2);
+		return(2);
 	}
-	else
+	return (1);
+}
+
+/**
+ * binary_handl - Handle b flag
+ * @b: Unsigned int
+ * Return: Length of binary output
+ */
+int binary_hndl(unsigned int b)
+{
+	int k;
+	int i = 0;
+	int j = 0;
+	unsigned int b_clone = b;
+	char *holder;
+
+	while (b_clone > 0)
 	{
-		return (1);
+		b_clone /= 2;
+		i++;
 	}
+	holder = malloc(i * sizeof(char));
+	while (b > 0)
+	{
+		holder[j] = (b % 2) + '0';
+		b /= 2;
+		j++;
+	}
+	for (k = i - 1; k >= 0; k--)
+	{
+		_putchar(holder[k]);
+	}
+	free(holder);
+	return (i);
 }
 

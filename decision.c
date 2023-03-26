@@ -10,7 +10,7 @@
  */
 int flg_handler(const char flag, va_list ap)
 {
-	char *valid_flags = "cdsipuoxX";
+	char *valid_flags = "cdbsipuoxX";
 
 	if (!strchr(valid_flags, flag))
 		return (unknown_char_hndl(flag));
@@ -18,6 +18,8 @@ int flg_handler(const char flag, va_list ap)
 		return (char_hndl(va_arg(ap, int)));
 	if (flag == 's')
 		return (string_hndl(va_arg(ap, char*)));
+	if (flag == 'b')
+		return (binary_hndl(va_arg(ap, unsigned int)));
 	va_end(ap);
 	return (0);
 }
