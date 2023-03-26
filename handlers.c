@@ -42,13 +42,13 @@ int unknown_char_hndl(char chr)
 	if (chr != '%')
 	{
 		_putchar(chr);
-		return(2);
+		return (2);
 	}
 	return (1);
 }
 
 /**
- * binary_handl - Handle b flag
+ * binary_hndl - Handle b flag
  * @b: Unsigned int
  * Return: Length of binary output
  */
