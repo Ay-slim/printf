@@ -2,7 +2,6 @@
 #define MAIN_H
 #include <stdarg.h>
 
-int _putchar(char c);
 int string_hndl(char *str, char *bfr, int idx);
 int char_hndl(char chr, char *bfr, int idx);
 int unknown_char_hndl(char chr, char *bfr, int idx);
