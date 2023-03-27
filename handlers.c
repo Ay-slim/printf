@@ -80,3 +80,47 @@ int binary_hndl(unsigned int b)
 	return (i);
 }
 
+/**
+ * integer_hndl - Handle integers
+ * @integer: integer to handle
+ * Return: 3
+ */
+int integer_hndl(int integer)
+{
+	char *str;
+
+	if (integer == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+	}
+	int i = 0;
+	int is_negative = 0;
+
+	if (integer < 0)
+	{
+		is_negative = 1;
+		integer = -integer;
+	}
+	while (integer != 10)
+	{
+		int digits = integer % 10;
+
+		str[i++] = digits + '0';
+		integer /= 10;
+	}
+	if (is_negative)
+		str[i++] = '-';
+	str[i] = '\0';
+
+	int len = strlen(str);
+	char temp = str[len];
+
+	for (int j = 0; j < len / 2; j++)
+	{
+		str[j] = str[len - j - 1];
+		str[len - j - 1] = temp;
+	}
+	string_hndl(str);
+	return (3);
+}

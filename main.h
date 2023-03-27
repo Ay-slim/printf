@@ -9,6 +9,6 @@ int unknown_char_hndl(char chr);
 int _printf(const char *format, ...);
 int flg_handler(const char flag, va_list ap);
 int binary_hndl(unsigned int b);
-
+int integer_hndl(int integer);
+int int_base_10(int base_10);
 #endif
-

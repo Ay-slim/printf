@@ -20,6 +20,10 @@ int flg_handler(const char flag, va_list ap)
 		return (string_hndl(va_arg(ap, char*)));
 	if (flag == 'b')
 		return (binary_hndl(va_arg(ap, unsigned int)));
+	if (flag == 'd')
+		return (integer_hndl(va_arg(ap, int)));
+	if (flag == 'i')
+		return (int_base_10(va_arg(ap, int)));
 	va_end(ap);
 	return (0);
 }
