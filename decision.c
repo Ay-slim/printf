@@ -12,7 +12,7 @@
  */
 int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 {
-	char *valid_flags = "cdbsipuoxX";
+	char *valid_flags = "cdbsipuoxrXR";
 
 	if (!strchr(valid_flags, flag))
 		return (unknown_char_hndl(flag, bfr, idx));
@@ -26,12 +26,16 @@ int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 10));
 	if (flag == 'o')
 		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 8));
-	if (flag == 'd')
+	if (flag == 'd' || flag == 'i')
 		return (digit_hndl(va_arg(ap, int), bfr, idx));
 	if (flag == 'x')
 		return (hexadec(va_arg(ap, unsigned int), bfr, idx, 'a'));
 	if (flag == 'X')
 		return (hexadec(va_arg(ap, unsigned int), bfr, idx, 'A'));
+	if (flag == 'R')
+		return (string_hndl(rot13(va_arg(ap, char*)), bfr, idx));
+	if (flag == 'r')
+		return (rev_hndl((va_arg(ap, char*)), bfr, idx));
 	va_end(ap);
 	return (0);
 }

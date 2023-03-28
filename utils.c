@@ -84,3 +84,4 @@ int hexadec(unsigned int b, char *bfr, int idx, char case_flag)
 	free(holder);
 	return (i);
 }
+

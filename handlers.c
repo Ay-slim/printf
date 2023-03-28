@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "main.h"
 
 /**
@@ -102,5 +103,27 @@ int digit_hndl(int num, char *bfr, int idx)
 	}
 	free(holder);
 	return (i + is_negative);
+}
+
+/**
+ * rev_hndl: String reversal
+ * @s: String to reverse
+ * @bfr: Buffer
+ * @idx: Index to fill
+ * Returns: Reversed string
+ */
+int rev_hndl(char *s, char *bfr, int idx)
+{
+	unsigned int len = strlen(s);
+	int i = len - 1;
+	int j = 0;
+
+	while (i >= 0)
+	{
+		bfr[idx + j] = s[i];
+		i--;
+		j++;
+	}
+	return (len);
 }
 
