@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * base_hndl - Handle b flag
@@ -83,5 +84,43 @@ int hexadec(unsigned int b, char *bfr, int idx, char case_flag)
 	}
 	free(holder);
 	return (i);
+}
+
+/**
+ * unprintable - Handles unprintable chars
+ * @chr: Unprintable character
+ * @bfr: Buffer
+ * @idx: Index to fill
+ * Return: Length
+ */
+int unprintable(char *chr, char *bfr, int idx)
+{
+	unsigned int len = strlen(chr);
+	int ascii_code;
+	unsigned int i = 0;
+	int ret_len = 0;
+	int buffer_idx = 0;
+
+	while (i < len)
+	{
+		ascii_code = (int)chr[i];
+		if ((ascii_code > 0 && ascii_code < 32) || ascii_code >= 127)
+		{
+			bfr[idx + i] = '\\';
+			bfr[idx + i + 1] = 'x';
+			bfr[idx + i + 2] = '0';
+			ret_len += (3 + hexadec(ascii_code, bfr, idx + i + 3, 'A'));
+			i++;
+			buffer_idx += 4;
+		}
+		else
+		{
+			bfr[idx + buffer_idx] = chr[i];
+			i++;
+			buffer_idx++;
+			ret_len++;
+		}
+	}
+	return (ret_len);
 }
 

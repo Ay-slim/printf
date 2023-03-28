@@ -12,7 +12,7 @@
  */
 int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 {
-	char *valid_flags = "cdbsipuoxrXR";
+	char *valid_flags = "cdbsipuoxrXRS";
 
 	if (!strchr(valid_flags, flag))
 		return (unknown_char_hndl(flag, bfr, idx));
@@ -36,6 +36,8 @@ int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 		return (string_hndl(rot13(va_arg(ap, char*)), bfr, idx));
 	if (flag == 'r')
 		return (rev_hndl((va_arg(ap, char*)), bfr, idx));
+	if (flag == 'S')
+		return (unprintable(va_arg(ap, char*), bfr, idx));
 	va_end(ap);
 	return (0);
 }

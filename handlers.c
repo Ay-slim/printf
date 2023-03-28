@@ -106,11 +106,11 @@ int digit_hndl(int num, char *bfr, int idx)
 }
 
 /**
- * rev_hndl: String reversal
+ * rev_hndl - String reversal
  * @s: String to reverse
  * @bfr: Buffer
  * @idx: Index to fill
- * Returns: Reversed string
+ * Return: Reversed string
  */
 int rev_hndl(char *s, char *bfr, int idx)
 {
