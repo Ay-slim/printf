@@ -5,16 +5,18 @@
 /**
  * string_hndl - Handle strings
  * @str: String to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: Number of characters
  */
-int string_hndl(char *str)
+int string_hndl(char *str, char *bfr, int idx)
 {
 	unsigned int i = 0;
 	unsigned int len = strlen(str);
 
 	while (i < len)
 	{
-		_putchar(str[i]);
+		bfr[idx + i] = str[i];
 		i++;
 	}
 	return (len);
@@ -22,105 +24,83 @@ int string_hndl(char *str)
 
 /**
  * char_hndl - Handle chars
- * @chr: Character to handle
+ * @chr: Char to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: 1
  */
-int char_hndl(char chr)
+int char_hndl(char chr, char *bfr, int idx)
 {
-	_putchar(chr);
+	bfr[idx] = chr;
 	return (1);
 }
 
 /**
  * unknown_char_hndl - Handle unknown chars
  * @chr: Character to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
  * Return: 2
  */
-int unknown_char_hndl(char chr)
+int unknown_char_hndl(char chr, char *bfr, int idx)
 {
-	_putchar('%');
+	bfr[idx] = '%';
 	if (chr != '%')
 	{
-		_putchar(chr);
+		bfr[idx + 1] = chr;
 		return (2);
 	}
 	return (1);
 }
 
 /**
- * binary_hndl - Handle b flag
- * @b: Unsigned int
- * Return: Length of binary output
+ * integer_hndl - Handle integers
+ * @num: integer to handle
+ * @bfr: Buffer
+ * @idx: Index to fill
+ * Return: length
  */
-int binary_hndl(unsigned int b)
+int integer_hndl(int num, char *bfr, int idx)
 {
 	int k;
 	int i = 0;
 	int j = 0;
-	unsigned int b_clone = b;
+	int l = 0;
+	int is_negative = 0;
+	int num_clone1;
+	int num_clone2;
 	char *holder;
 
-	while (b_clone > 0)
+	if (num < 0)
 	{
-		b_clone /= 2;
+		is_negative = 1;
+		num_clone1 = num * -1;
+		num_clone2 = num * -1;
+		bfr[idx] = '-';
+	}
+	else
+	{
+		num_clone1 = num;
+		num_clone2 = num;
+	}
+	while (num_clone1 > 0)
+	{
+		num_clone1 /= 10;
 		i++;
 	}
 	holder = malloc(i * sizeof(char));
-	while (b > 0)
+	while (num_clone2 > 0)
 	{
-		holder[j] = (b % 2) + '0';
-		b /= 2;
+		holder[j] = (num_clone2 % 10) + '0';
+		num_clone2 /= 10;
 		j++;
 	}
 	for (k = i - 1; k >= 0; k--)
 	{
-		_putchar(holder[k]);
+		bfr[idx + l + is_negative] = holder[k];
+		l++;
 	}
 	free(holder);
-	return (i);
+	return (i + is_negative);
 }
 
-/**
- * integer_hndl - Handle integers
- * @integer: integer to handle
- * Return: 3
- */
-int integer_hndl(int integer)
-{
-	char *str;
-
-	if (integer == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
-	}
-	int i = 0;
-	int is_negative = 0;
-
-	if (integer < 0)
-	{
-		is_negative = 1;
-		integer = -integer;
-	}
-	while (integer != 10)
-	{
-		int digits = integer % 10;
-
-		str[i++] = digits + '0';
-		integer /= 10;
-	}
-	if (is_negative)
-		str[i++] = '-';
-	str[i] = '\0';
-
-	int len = strlen(str);
-	char temp = str[len];
-
-	for (int j = 0; j < len / 2; j++)
-	{
-		str[j] = str[len - j - 1];
-		str[len - j - 1] = temp;
-	}
-	string_hndl(str);
-	return (3);
-}

@@ -6,24 +6,28 @@
  * flg_handler - Decide which handler to use
  * @flag: Format flag
  * @ap: Variadic function list variable
+ * @bfr: Buffer to print to
+ * @idx: Last filled buffer index
  * Return: Nothing
  */
-int flg_handler(const char flag, va_list ap)
+int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 {
 	char *valid_flags = "cdbsipuoxX";
 
 	if (!strchr(valid_flags, flag))
-		return (unknown_char_hndl(flag));
+		return (unknown_char_hndl(flag, bfr, idx));
 	if (flag == 'c')
-		return (char_hndl(va_arg(ap, int)));
+		return (char_hndl(va_arg(ap, int), bfr, idx));
 	if (flag == 's')
-		return (string_hndl(va_arg(ap, char*)));
+		return (string_hndl(va_arg(ap, char*), bfr, idx));
 	if (flag == 'b')
-		return (binary_hndl(va_arg(ap, unsigned int)));
+		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 2));
+	if (flag == 'u')
+		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 10));
+	if (flag == 'o')
+		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 8));
 	if (flag == 'd')
-		return (integer_hndl(va_arg(ap, int)));
-	if (flag == 'i')
-		return (int_base_10(va_arg(ap, int)));
+		return (integer_hndl(va_arg(ap, int), bfr, idx));
 	va_end(ap);
 	return (0);
 }
