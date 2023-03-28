@@ -54,13 +54,13 @@ int unknown_char_hndl(char chr, char *bfr, int idx)
 }
 
 /**
- * integer_hndl - Handle integers
+ * digit_hndl - Handle integers
  * @num: integer to handle
  * @bfr: Buffer
  * @idx: Index to fill
  * Return: length
  */
-int integer_hndl(int num, char *bfr, int idx)
+int digit_hndl(int num, char *bfr, int idx)
 {
 	int k;
 	int i = 0;

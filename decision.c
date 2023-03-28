@@ -27,7 +27,11 @@ int flg_handler(const char flag, va_list ap, char *bfr, int idx)
 	if (flag == 'o')
 		return (base_hndl(va_arg(ap, unsigned int), bfr, idx, 8));
 	if (flag == 'd')
-		return (integer_hndl(va_arg(ap, int), bfr, idx));
+		return (digit_hndl(va_arg(ap, int), bfr, idx));
+	if (flag == 'x')
+		return (hexadec(va_arg(ap, unsigned int), bfr, idx, 'a'));
+	if (flag == 'X')
+		return (hexadec(va_arg(ap, unsigned int), bfr, idx, 'A'));
 	va_end(ap);
 	return (0);
 }
